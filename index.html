@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guesthouse Matese — Piedimonte Matese & San Gregorio Matese</title>
+  <meta name="description" content="Due case, un solo orizzonte: il lago e i monti del Matese. Soggiorni a Piedimonte Matese e sulle rive del lago Matese. Spazi curati, silenzio, natura.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #2c3e2d;
+      --color-accent: #8b7355;
+      --color-warm: #c4a882;
+      --color-light: #f7f4ef;
+      --color-cream: #faf8f5;
+      --color-text: #3a3a3a;
+      --color-text-light: #6b6b6b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --max-width: 1200px;
+      --radius: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--color-accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--color-primary); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+    nav.scrolled { background: rgba(250, 248, 245, 0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 2rem;
+    }
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--color-primary);
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--color-text-light); letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-links .btn-nav {
+      background: var(--color-primary);
+      color: white !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+    }
+    .nav-links .btn-nav:hover { background: var(--color-accent); }
+
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(180deg, var(--color-light) 0%, var(--color-cream) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url('images/hero-bg.jpg') center/cover no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-tag {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--color-accent); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600; color: var(--color-primary);
+      line-height: 1.2; margin-bottom: 1.2rem;
+    }
+    .hero p {
+      font-size: 1.05rem; color: var(--color-text-light);
+      max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; border-radius: var(--radius);
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: all 0.3s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--color-primary); color: white; }
+    .btn-primary:hover { background: var(--color-accent); color: white; }
+    .btn-outline { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
+    .btn-outline:hover { background: var(--color-primary); color: white; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--color-accent); margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600; color: var(--color-primary);
+      margin-bottom: 1rem; line-height: 1.3;
+    }
+    .section-subtitle {
+      font-size: 1rem; color: var(--color-text-light);
+      max-width: 560px; line-height: 1.8; margin-bottom: 3rem;
+    }
+
+    /* STRUCTURES CARDS */
+    .structures { background: var(--color-cream); }
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+    .card-image {
+      height: 260px;
+      background-size: cover; background-position: center;
+      position: relative;
+    }
+    .card-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+    }
+    .card-badge {
+      position: absolute; top: 1rem; left: 1rem; z-index: 2;
+      background: white; padding: 0.35rem 0.9rem;
+      border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary);
+    }
+    .card-body { padding: 1.8rem; }
+    .card-location {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--color-accent); margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem; font-weight: 600;
+      color: var(--color-primary); margin-bottom: 0.8rem;
+    }
+    .card-desc {
+      font-size: 0.9rem; color: var(--color-text-light);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .card-details {
+      display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .card-detail {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; color: var(--color-text-light);
+    }
+    .card-detail svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .card-link {
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--color-primary); letter-spacing: 0.03em;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .card-link:hover { gap: 0.7rem; }
+    .card-link svg { width: 16px; height: 16px; transition: 0.2s; }
+
+    /* TERRITORIO */
+    .territory { background: var(--color-light); }
+    .territory-content {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    .territory-text p {
+      font-size: 0.95rem; color: var(--color-text-light);
+      line-height: 1.9; margin-bottom: 1.5rem;
+    }
+    .territory-image {
+      border-radius: 8px; overflow: hidden;
+      height: 400px;
+      background: url('images/territorio-bg.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .territory-features {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-top: 2rem;
+    }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      padding: 1rem; background: white;
+      border-radius: var(--radius);
+    }
+    .feature-icon {
+      width: 36px; height: 36px;
+      background: var(--color-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1rem;
+    }
+    .feature-text { font-size: 0.85rem; font-weight: 500; color: var(--color-text); }
+
+    /* CIN SECTION */
+    .cin-section {
+      background: var(--color-primary);
+      color: white; text-align: center;
+      padding: 3rem 2rem;
+    }
+    .cin-section .section-inner { max-width: 600px; }
+    .cin-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.08em; margin-bottom: 1rem;
+    }
+    .cin-codes {
+      font-family: monospace; font-size: 0.85rem;
+      opacity: 0.8; margin-top: 0.8rem;
+    }
+
+    /* CONTATTI */
+    .contacts { background: var(--color-cream); }
+    .contacts-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .contact-card {
+      background: white; padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+    .contact-icon {
+      width: 48px; height: 48px;
+      background: var(--color-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; font-size: 1.3rem;
+    }
+    .contact-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem; color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      font-size: 0.85rem; color: var(--color-text-light);
+      margin-bottom: 1.2rem; line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,0.7);
+      padding: 3rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1rem; color: white;
+      margin-bottom: 0.5rem;
+    }
+    .footer-copy { font-size: 0.75rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      max-width: var(--max-width); margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center; font-size: 0.72rem; opacity: 0.5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.active {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--color-cream); padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        gap: 1rem;
+      }
+      .territory-content { grid-template-columns: 1fr; }
+      .territory-image { height: 250px; order: -1; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .hero { padding: 5rem 1.5rem 3rem; min-height: 90vh; }
+      section { padding: 3.5rem 1.5rem; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">Guesthouse Matese</div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="#strutture">Strutture</a>
+        <a href="#territorio">Territorio</a>
+        <a href="#contatti">Contatti</a>
+        <a href="https://wa.me/393279053748" target="_blank" class="btn-nav">WhatsApp</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tag">Parco Nazionale del Matese · Campania</p>
+      <h1>Due case, un solo orizzonte: il lago e i monti del Matese</h1>
+      <p>Soggiorni a Piedimonte Matese e sulle rive del lago Matese. Spazi curati, silenzio, e la montagna a portata di mano.</p>
+      <div class="hero-buttons">
+        <a href="#strutture" class="btn btn-primary">Scopri le strutture</a>
+        <a href="#contatti" class="btn btn-outline">Contattaci</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUTTURE -->
+  <section class="structures" id="strutture">
+    <div class="section-inner">
+      <div class="section-tag">Le nostre case</div>
+      <h2 class="section-title">Due indirizzi, la stessa cura per l'ospite</h2>
+      <p class="section-subtitle">Due piccole strutture a conduzione diretta, pensate per chi cerca un punto d'appoggio comodo e curato per esplorare il Parco Nazionale del Matese.</p>
+
+      <div class="cards-grid">
+        <!-- CARD 1: Guesthouse Matese -->
+        <div class="card fade-in">
+          <div class="card-image" style="background-image: url('images/GM_spazio_esterno_antistante_ingresso_1.jpg');">
+            <span class="card-badge">Piedimonte Matese</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Via Matese, 31 — Piedimonte Matese (CE)</div>
+            <h3 class="card-title">Guesthouse Matese</h3>
+            <p class="card-desc">Un'antica dimora nel centro di Piedimonte Matese, alle porte del parco: ideale per chi viaggia in gruppo o desidera camere separate con la flessibilità di condividere gli spazi comuni.</p>
+            <div class="card-details">
+              <span class="card-detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M21 7H3l2-4h14l2 4z"/><path d="M12 7v4"/></svg>
+                Camera matrimoniale
+              </span>
+              <span class="card-detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M21 7H3l2-4h14l2 4z"/></svg>
+                2 camere singole
+              </span>
+              <span class="card-detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                4 ospiti
+              </span>
+            </div>
+            <a href="/guesthouse-matese" class="card-link">
+              Scopri la struttura
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 2: Guesthouse Matese ai Prati -->
+        <div class="card fade-in">
+          <div class="card-image" style="background-image: url('images/GMP_vista_lago_dalla_finestra_soggiorno.jpg');">
+            <span class="card-badge">San Gregorio Matese</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Via Circumlago — San Gregorio Matese (CE)</div>
+            <h3 class="card-title">Guesthouse Matese ai Prati</h3>
+            <p class="card-desc">Sulla strada che costeggia il lago Matese, a due passi dall'acqua: la casa ideale per una coppia o una famiglia che vuole svegliarsi con la vista sul lago.</p>
+            <div class="card-details">
+              <span class="card-detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M21 7H3l2-4h14l2 4z"/></svg>
+                Camera doppia
+              </span>
+              <span class="card-detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                fino a 4 ospiti
+              </span>
+            </div>
+            <a href="/guesthouse-matese-ai-prati" class="card-link">
+              Scopri la struttura
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERRITORIO -->
+  <section class="territory" id="territorio">
+    <div class="section-inner">
+      <div class="territory-content">
+        <div class="territory-text">
+          <div class="section-tag">Il territorio</div>
+          <h2 class="section-title">Il Matese, tra i parchi più silenziosi del Sud Italia</h2>
+          <p>Il Parco Nazionale del Matese custodisce boschi, sentieri di alta quota e un lago d'altura che cambia colore con la luce del giorno. Da entrambe le case si raggiungono in pochi minuti i punti di partenza dei principali percorsi escursionistici, il Lago Matese e i borghi storici della zona.</p>
+          <p>Che si tratti di un weekend di cammino, di una vacanza in famiglia o di una sosta lungo un itinerario più lungo, entrambe le strutture offrono un punto d'appoggio autentico, gestito direttamente dagli host.</p>
+          <div class="territory-features">
+            <div class="feature-item">
+              <div class="feature-icon">🏔️</div>
+              <span class="feature-text">Alta quota e vette</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🌊</div>
+              <span class="feature-text">Lago d'altura</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🥾</div>
+              <span class="feature-text">Sentieri escursionistici</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🏘️</div>
+              <span class="feature-text">Borghi storici</span>
+            </div>
+          </div>
+        </div>
+        <div class="territory-image"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIN -->
+  <div class="cin-section">
+    <div class="section-inner">
+      <div class="cin-badge">Strutture autorizzate</div>
+      <h3 class="section-title" style="color:white; font-size: 1.3rem;">Registrazione ufficiale</h3>
+      <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.5rem;">Entrambe le strutture sono registrate presso la Regione Campania</p>
+      <div class="cin-codes">
+        CIN Guesthouse Matese: IT061057C2926UIS8W<br>
+        CIN G. Matese ai Prati: IT061076C2ROFELE22
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTATTI -->
+  <section class="contacts" id="contatti">
+    <div class="section-inner">
+      <div class="section-tag">Contattaci</div>
+      <h2 class="section-title">Scrivici per organizzare il soggiorno</h2>
+      <p class="section-subtitle">Richiedi disponibilità e prezzo personalizzato. Rispondiamo di persona, di solito entro poche ore.</p>
+
+      <div class="contacts-grid">
+        <div class="contact-card fade-in">
+          <div class="contact-icon">💬</div>
+          <h3>WhatsApp</h3>
+          <p>La modalità più rapida. Scrivici le tue date e il numero di ospiti.</p>
+          <a href="https://wa.me/393279053748" target="_blank" class="btn btn-primary">Scrivici su WhatsApp</a>
+        </div>
+        <div class="contact-card fade-in">
+          <div class="contact-icon">📧</div>
+          <h3>Email</h3>
+          <p>Per una richiesta formale o informazioni specifiche, mandaci un'email.</p>
+          <a href="mailto:info@guesthousematese.net" class="btn btn-outline">info@guesthousematese.net</a>
+        </div>
+        <div class="contact-card fade-in">
+          <div class="contact-icon">🏠</div>
+          <h3>Prenota online</h3>
+          <p>Trova le nostre strutture su Booking e Airbnb con disponibilità in tempo reale.</p>
+          <a href="#" class="btn btn-outline">Vedi disponibilità</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Guesthouse Matese</div>
+        <div class="footer-copy">Piedimonte Matese & San Gregorio Matese, Campania</div>
+      </div>
+      <div class="footer-links">
+        <a href="#strutture">Strutture</a>
+        <a href="#territorio">Territorio</a>
+        <a href="#contatti">Contatti</a>
+        <a href="https://wa.me/393279053748" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Guesthouse Matese — P.IVA / CEDolare — Tutti i diritti riservati
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

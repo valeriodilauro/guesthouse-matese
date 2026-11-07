@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — Guesthouse Matese</title>
+  <meta name="description" content="Contatta Guesthouse Matese per richieste di disponibilità, informazioni e prenotazioni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2c3e2d; --accent: #8b7355; --warm: #c4a882;
+      --light: #f7f4ef; --cream: #faf8f5; --text: #3a3a3a; --text-light: #6b6b6b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --max-width: 700px; --radius: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--cream); line-height: 1.7; }
+    a { color: var(--accent); text-decoration: none; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,245,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 2rem;
+    }
+    .nav-logo { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; color: var(--primary); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-light); letter-spacing: 0.03em; text-transform: uppercase; }
+    .nav-links .btn-nav { background: var(--primary); color: white !important; padding: 0.5rem 1.2rem; border-radius: var(--radius); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 500; color: var(--text-light);
+      margin: 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    header.page-header {
+      padding: 7rem 2rem 2rem; text-align: center;
+      background: linear-gradient(180deg, var(--light) 0%, var(--cream) 100%);
+    }
+    header.page-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 600; color: var(--primary); margin-bottom: 0.8rem;
+    }
+
+    section { padding: 3rem 2rem; }
+    .inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 600; color: var(--primary); margin-bottom: 1rem;
+    }
+
+    /* CONTACT CARDS */
+    .contact-cards { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 1.5rem;
+      background: white; padding: 1.5rem 2rem;
+      border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+    }
+    .contact-icon {
+      width: 52px; height: 52px; background: var(--light);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+    }
+    .contact-info h3 { font-family: var(--font-heading); font-size: 1.05rem; color: var(--primary); margin-bottom: 0.2rem; }
+    .contact-info p { font-size: 0.85rem; color: var(--text-light); }
+    .contact-info a { font-weight: 500; }
+
+    /* FORM */
+    .form-section { background: var(--light); border-radius: 8px; padding: 2.5rem; }
+    .form-section h3 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--primary); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.82rem; font-weight: 500;
+      color: var(--text-light); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.8rem 1rem; border: 1.5px solid #e0ddd8;
+      border-radius: var(--radius); font-family: var(--font-body);
+      font-size: 0.9rem; background: white; transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      background: var(--primary); color: white; border: none;
+      padding: 0.9rem 2.5rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500; cursor: pointer;
+      width: 100%; transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent); }
+
+    .form-note { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; text-align: center; }
+
+    footer {
+      background: var(--primary); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 2rem; font-size: 0.75rem; margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-card { flex-direction: column; text-align: center; }
+      section { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Guesthouse Matese</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/guesthouse-matese">Guesthouse Matese</a>
+        <a href="/guesthouse-matese-ai-prati">Ai Prati</a>
+        <a href="https://wa.me/393279053748" target="_blank" class="btn-nav">WhatsApp</a>
+      </div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="inner">
+    <a href="/" class="back-link">← Torna alla home</a>
+  </div>
+
+  <header class="page-header">
+    <h1>Contatti</h1>
+    <p style="color: var(--text-light);">Siamo a due messaggi di distanza. Scrivici per qualsiasi informazione o richiesta di disponibilità.</p>
+  </header>
+
+  <section>
+    <div class="inner">
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <div class="contact-info">
+            <h3>WhatsApp — il più veloce</h3>
+            <p>Rispondiamo in pochi minuti. Perfetto per disponibilità e prezzi.</p>
+            <a href="https://wa.me/393279053748" target="_blank">+39 327 905 3748 →</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div class="contact-info">
+            <h3>Email</h3>
+            <p>Per richieste formali, gruppi o informazioni specifiche.</p>
+            <a href="mailto:info@guesthousematese.net">info@guesthousematese.net →</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div class="contact-info">
+            <h3>Dove siamo</h3>
+            <p>Piedimonte Matese (CE) · San Gregorio Matese (CE)<br>Parco Nazionale del Matese, Campania</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Modulo di richiesta</h3>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nome e cognome</label>
+              <input type="text" id="name" name="name" required placeholder="Mario Rossi">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="mario@email.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkin">Arrivo</label>
+              <input type="date" id="checkin" name="checkin">
+            </div>
+            <div class="form-group">
+              <label for="checkout">Partenza</label>
+              <input type="date" id="checkout" name="checkout">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="structure">Struttura</label>
+              <select id="structure" name="structure">
+                <option value="">Seleziona…</option>
+                <option value="guesthouse-matese">Guesthouse Matese — Piedimonte Matese</option>
+                <option value="guesthouse-ai-prati">Guesthouse Matese ai Prati — San Gregorio Matese</option>
+                <option value="non-sa">Non sono sicuro / Entrambe</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="guests">Ospiti</label>
+              <select id="guests" name="guests">
+                <option value="1">1 ospite</option>
+                <option value="2" selected>2 ospiti</option>
+                <option value="3">3 ospiti</option>
+                <option value="4">4 ospiti</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Messaggio</label>
+            <textarea id="message" name="message" placeholder="Date flessibili, siamo una famiglia con bambini…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Invia richiesta</button>
+          <p class="form-note">Risponderemo entro poche ore con disponibilità e prezzo personalizzato.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Guesthouse Matese
+  </footer>
+
+</body>
+</html>

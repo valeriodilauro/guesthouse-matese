@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guesthouse Matese ai Prati — San Gregorio Matese</title>
+  <meta name="description" content="Sulla strada che costeggia il lago Matese: una casa raccolta con vista sull'acqua, pensata per una coppia o una famiglia fino a 4 persone.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2c3e2d; --accent: #8b7355; --warm: #c4a882;
+      --light: #f7f4ef; --cream: #faf8f5; --text: #3a3a3a; --text-light: #6b6b6b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --max-width: 1100px; --radius: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--cream); line-height: 1.7; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,245,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 2rem;
+    }
+    .nav-logo { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600; color: var(--primary); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-light); letter-spacing: 0.03em; text-transform: uppercase; }
+    .nav-links .btn-nav { background: var(--primary); color: white !important; padding: 0.5rem 1.2rem; border-radius: var(--radius); }
+    .nav-links .btn-nav:hover { background: var(--accent); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 500; color: var(--text-light);
+      margin: 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .back-link:hover { color: var(--primary); }
+
+    header.page-header {
+      padding: 8rem 2rem 3rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--light) 0%, var(--cream) 100%);
+    }
+    .page-header .location-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .page-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600; color: var(--primary); margin-bottom: 0.8rem;
+    }
+    .page-header p { font-size: 1rem; color: var(--text-light); max-width: 500px; margin: 0 auto; }
+
+    section { padding: 4rem 2rem; }
+    .inner { max-width: var(--max-width); margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 600; color: var(--primary); margin-bottom: 1.5rem;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+    }
+    .gallery img {
+      border-radius: var(--radius);
+      width: 100%; height: 200px; object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .gallery img:hover { transform: scale(1.02); opacity: 0.9; }
+
+    /* ROOMS */
+    .rooms { background: var(--light); }
+    .room-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      background: white; border-radius: 8px; overflow: hidden;
+      margin-bottom: 1.5rem; box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+    }
+    .room-card img {
+      width: 100%; height: 100%; object-fit: cover; min-height: 250px;
+    }
+    .room-info { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+    .room-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem; color: var(--primary); margin-bottom: 0.8rem;
+    }
+    .room-info p { font-size: 0.9rem; color: var(--text-light); line-height: 1.8; }
+
+    /* SERVICES */
+    .services-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .service-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 1rem 1.2rem; background: var(--light);
+      border-radius: var(--radius); font-size: 0.88rem;
+    }
+    .service-icon { font-size: 1.2rem; }
+
+    /* BOOKING CTA */
+    .booking-cta {
+      background: var(--primary); color: white; text-align: center;
+      padding: 4rem 2rem;
+    }
+    .booking-cta h2 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem; }
+    .booking-cta p { opacity: 0.8; margin-bottom: 2rem; font-size: 0.95rem; }
+    .btn-white {
+      background: white; color: var(--primary);
+      padding: 0.85rem 2rem; border-radius: var(--radius); font-weight: 500; display: inline-flex;
+    }
+    .btn-white:hover { background: var(--warm); color: white; }
+    .btn-whatsapp {
+      background: #25d366; color: white;
+      padding: 0.85rem 2rem; border-radius: var(--radius);
+      font-weight: 500; display: inline-flex; margin-left: 0.5rem;
+    }
+    .btn-whatsapp:hover { background: #1da851; }
+
+    footer {
+      background: var(--primary); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 2rem; font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .room-card { grid-template-columns: 1fr; }
+      .room-card img { height: 220px; }
+      section { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Guesthouse Matese</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/guesthouse-matese">Guesthouse Matese</a>
+        <a href="/contatti">Contatti</a>
+        <a href="https://wa.me/393279053748" target="_blank" class="btn-nav">WhatsApp</a>
+      </div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="inner">
+    <a href="/" class="back-link">← Torna alla home</a>
+  </div>
+
+  <header class="page-header">
+    <div class="location-tag">San Gregorio Matese · Campania</div>
+    <h1>Guesthouse Matese ai Prati</h1>
+    <p>Sulla strada che costeggia il lago Matese: una casa raccolta con vista sull'acqua.</p>
+  </header>
+
+  <!-- GALLERY -->
+  <section>
+    <div class="inner">
+      <div class="section-tag">Gli spazi</div>
+      <h2 class="section-title">La galleria</h2>
+      <div class="gallery">
+        <img src="images/GMP_vista_lago_dalla_finestra_soggiorno.jpg" alt="Vista lago">
+        <img src="images/GMP_ingresso_esterno_sinistra_strada.jpg" alt="Ingresso">
+        <img src="images/GMP_spazio_esterno_antistante_da_sinistra.jpg" alt="Spazio esterno">
+        <img src="images/GMP_interno_soggiorno_1.jpg" alt="Soggiorno">
+        <img src="images/GMP_camera_doppia_1.jpg" alt="Camera doppia">
+        <img src="images/GMP_camera_doppia_2.jpg" alt="Camera doppia vista">
+        <img src="images/GMP_camera_doppia_2_finestra.jpg" alt="Finestra camera">
+        <img src="images/GMP_cucina_1.jpg" alt="Cucina">
+        <img src="images/GMP_interno_soggiorno_2.jpg" alt="Soggiorno altra vista">
+        <img src="images/GMP_interno_soggiorno_3.jpg" alt="Soggiorno dettaglio">
+        <img src="images/GMP_bagno_1.jpg" alt="Bagno">
+        <img src="images/GMP_bagno_2.jpg" alt="Bagno altra vista">
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS -->
+  <section class="rooms">
+    <div class="inner">
+      <div class="section-tag">Gli spazi per dormire</div>
+      <h2 class="section-title">Camera doppia e living</h2>
+
+      <div class="room-card">
+        <img src="images/GMP_camera_doppia_1.jpg" alt="Camera doppia">
+        <div class="room-info">
+          <h3>Camera doppia</h3>
+          <p>La camera principale della casa, luminosa e affacciata sul verde circostante. L'ideale per una coppia che cerca comfort e tranquillità.</p>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <img src="images/GMP_interno_soggiorno_1.jpg" alt="Living con vista lago">
+        <div class="room-info">
+          <h3>Living con divano letto</h3>
+          <p>Il soggiorno si affaccia sul lago Matese e può accogliere fino a due ospiti aggiuntivi grazie al divano apribile: perfetto per una famiglia o un gruppo di amici, fino a 4 persone in totale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section>
+    <div class="inner">
+      <div class="section-tag">Servizi</div>
+      <h2 class="section-title">Cosa trovi in struttura</h2>
+      <div class="services-list">
+        <div class="service-item"><span class="service-icon">📶</span> Wi-Fi gratuito</div>
+        <div class="service-item"><span class="service-icon">🍳</span> Cucina attrezzata</div>
+        <div class="service-item"><span class="service-icon">🌊</span> Soggiorno con vista lago</div>
+        <div class="service-item"><span class="service-icon">🛏️</span> Biancheria da letto e asciugamani</div>
+        <div class="service-item"><span class="service-icon">🌿</span> Spazio esterno antistante la casa</div>
+        <div class="service-item"><span class="service-icon">🅿️</span> Parcheggio nelle vicinanze</div>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1.2rem;">Per l'elenco completo dei servizi contattare l'host.</p>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="booking-cta" id="richiedi">
+    <h2>Richiedi disponibilità</h2>
+    <p>Scrivi le tue date e il numero di ospiti: rispondiamo di persona, di solito entro poche ore.</p>
+    <div>
+      <a href="/contatti" class="btn-white">Modulo di richiesta</a>
+      <a href="https://wa.me/393279053748" target="_blank" class="btn-whatsapp">WhatsApp</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Guesthouse Matese ai Prati — CIN: IT061076C2ROFELE22
+  </footer>
+
+</body>
+</html>
